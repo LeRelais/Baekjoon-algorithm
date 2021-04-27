@@ -28,21 +28,12 @@ int main() {
 	char ucpc[5] = { 'U', 'C', 'P', 'C' };
 
 	for (int i = 0; i < strlen(pat); i++) {
-		for (j = 0; j < 4; j++) {
-			if (pat[i] == ucpc[j]) {
-				count += 1;
-				i++;
-				if (count == 4) {
-					cout << "I love UCPC\n";
-					return 0;
-				}
-			}
-			else {
-				i++;
-				break;
-			}
-		}
-	}	
-	cout << "I hate UCPC\n";
+		if (count == 4) break;
+		if (pat[i] == ucpc[count]) count++;
+	}
+	if (count == 4)
+		cout << "I love UCPC";
+	else
+		cout << "I hate UCPC";
 	return 0;
 }
