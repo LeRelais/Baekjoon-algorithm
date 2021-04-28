@@ -19,7 +19,10 @@ int main() {
 		if (p == 0)
 			break;
 		count = v / p;
-		v %= p;
+		if (v % p > l)
+			v = l;
+		else
+			v = v % p;
 		days = count * l + v;
 		printf("Case %d: %d\n", idx, days);
 		idx++;
