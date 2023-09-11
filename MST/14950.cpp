@@ -21,9 +21,9 @@ void Union(int x, int y) {
 
 	if (px == py) return;
 
-	if (px > py) city[x] = py;
+	if (px > py) city[px] = py;
 	else
-		city[y] = px;
+		city[py] = px;
 }
 
 vector<pair<int, pair<int, int>>> kruscal() {
