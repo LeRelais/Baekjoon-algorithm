@@ -13,34 +13,30 @@ int main() {
 	int tmp = 0;
 	for (int i = 0; i < n; i++) {
 		cin >> arr[i];
-		tmp = max(tmp, arr[i]);
 	}
 
 
 	stack<int> s;
-	s.push(arr[0]);
-	int idx = 0;
 
-	if (tmp == arr[0])
-	{
-		nge[idx++] = -1;
-	}
-	for (int i = 1; i < n; i++) {
-		if (s.empty())
+	for (int i = n - 1; i >= 0; i--) {
+		if (s.empty()) {
+			nge[i] = -1;
 			s.push(arr[i]);
+		}
 		else {
-			while (!s.empty() && s.top() < arr[i]) {
-				nge[idx++] = arr[i];
+			while (!s.empty() && s.top() <= arr[i])
 				s.pop();
-			}
+
+			if (s.empty())
+				nge[i] = -1;
+			else
+				nge[i] = s.top();
+
 			s.push(arr[i]);
 		}
 	}
 
-	nge[n - 1] = -1;
-
-	for (int i = 0; i < n; i++) {
+	for (int i = 0; i < n; i++)
 		cout << nge[i] << ' ';
-	}
 	return 0;
 }
