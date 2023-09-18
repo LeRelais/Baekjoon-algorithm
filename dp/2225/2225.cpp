@@ -18,6 +18,7 @@ int main() {
 			for (int x = 0; x <= i; x++) {
 				dp[j][i] += dp[j - 1][x];
 			}
+			dp[j][i] %= 1000000000;
 		}
 	}
 
