@@ -20,7 +20,7 @@ void dfs(int start, int next) {
         return;
     }
 
-    used[arr[next]] = 1;
+    used[next] = 1;
     dfs(start, arr[next]);
 
     if (flag) {
@@ -39,6 +39,10 @@ int main() {
     for (int i = 1; i <= n; i++) {
         used[i] = 1;
         dfs(i, arr[i]);
+        // for(int j = 1; j <= n; j++){
+        //     cout << used[j] << ' ';
+        // }
+        // cout << endl;
         memset(used, false, sizeof(used));
         flag = false;
     }
