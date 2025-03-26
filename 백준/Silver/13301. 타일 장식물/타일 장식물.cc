@@ -2,8 +2,8 @@
 
 using namespace std;
 
-int dp_perimeter[81];
-int dp_line[81];
+long long dp_perimeter[81];
+long long dp_line[81];
 
 int main() {
     int n;
