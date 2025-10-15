@@ -40,36 +40,39 @@ void init(){
 }
 
 void solve(){
-    vector<int> dp(n, 1);
-    vector<int> pre(n, -1); 
-    int res = 0, idx;
-    
+    vector<int> lis;
+    vector<int> pos(n+1);
     for(int i = 0; i < n; i++){
-        for(int j = 0; j < i; j++){
-            if(lines[i].b > lines[j].b){
-                if(dp[i] < dp[j]+1){
-                    dp[i] = dp[j]+1;
-                    pre[i] = j;
-                }
-            }
+        int val = lines[i].b;
+        auto it = lower_bound(lis.begin(), lis.end(), val);
+        int p = it - lis.begin();
+        if(it == lis.end()){
+            lis.push_back(val);
         }
-        if (dp[i] > res) {
-            res = dp[i];
-            idx = i;
-        }
+        else
+            *it = val;
+        pos[i] = p;
     }
     
-    vector<int> switches;
-    while(idx != -1){
-        switches.push_back(lines[idx].num);
-        idx = pre[idx];
+    cout << lis.size() << '\n';
+    vector<int> res_v;
+    int len = lis.size() - 1;
+    for(int i = n-1; i >= 0; i--){
+        if(pos[i] == len){
+            len--;
+            res_v.push_back(lines[i].num);
+        }
+        if(len < 0)
+            break;
     }
-    cout << res << '\n';
-    sort(switches.begin(), switches.end());
-    for(int i = 0; i < switches.size(); i++){
-        cout << switches[i] << ' ';
+    
+    sort(res_v.begin(), res_v.end());
+    for(int i = 0; i < res_v.size(); i++){
+        cout << res_v[i] << ' ';
     }
+    cout << endl;
 }
+
 
 int main() {
     ios::sync_with_stdio(false);
