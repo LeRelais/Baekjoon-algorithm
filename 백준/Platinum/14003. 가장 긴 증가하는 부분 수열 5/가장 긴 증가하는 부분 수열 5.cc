@@ -1,58 +1,62 @@
 #include <iostream>
 #include <vector>
+#include <algorithm>
+
 using namespace std;
 
-int n, arr[1000001], index[1000001];
-vector<int> seq;
+int n;
+vector<int> seq, pos, lis;
 
-void input(){
+void init(){
     cin >> n;
-    for(int i = 1; i <= n; i++){
-        cin >> arr[i];
+    seq.resize(n);
+    pos.resize(n, -1);
+    for(int i = 0; i < n; i++){
+        cin >> seq[i];
     }
 }
 
 void solve(){
-    
-    for(int i = 1; i <= n; i++){
-        if(seq.size() == 0 || arr[i] > seq.back()){
-            seq.push_back(arr[i]);
-            index[i] = seq.size()-1;
+    int max_len = 0, start_len;
+    for(int i = 0; i < n; i++){
+        int val = seq[i];
+        auto it = lower_bound(lis.begin(), lis.end(), val);
+        int idx = it - lis.begin();
+        
+        if(it == lis.end()){
+            lis.push_back(val);
         }
-        else{
-            int left = 0, right = seq.size()-1;
-            while(left < right){
-                int mid = (left + right) / 2;
-                
-                if(seq[mid] >= arr[i]){
-                    right = mid;
-                }
-                else 
-                    left = mid + 1;
-            }
-            seq[left] = arr[i];
-            index[i] = left;
+        else
+            *it = val;
+        pos[i] = idx;
+        
+        if(idx+1 > max_len){
+            max_len = idx;
         }
     }
-    
-    cout << seq.size() << '\n';
-    int f = seq.size()-1;
-    vector<int> answer;
-    for(int i = n; i > 0; i--){
-        if(index[i] == f){
-            f--;
-            answer.push_back(arr[i]);
+    vector<int> used(n, 0);
+    int cnt = 0;
+    for(int i = n-1; i >= 0; i--){
+        if(pos[i] == max_len){
+            used[i] = 1;
+            cnt++;
+            max_len--;
         }
+        if(max_len < 0)
+            break;
     }
     
-    for(int i = answer.size()-1; i >= 0; i--) cout << answer[i] << ' ';
+    cout << cnt << '\n';
+    for(int i = 0; i < n; i++){
+        if(used[i])
+            cout << seq[i] << ' ';
+    }
 }
 
 int main() {
     ios::sync_with_stdio(false);
-	cin.tie(0);
-    cin.tie(nullptr); cout.tie(nullptr);
-   
-    input();
+    cin.tie(NULL);
+    init();
     solve();
+    return 0;
 }
