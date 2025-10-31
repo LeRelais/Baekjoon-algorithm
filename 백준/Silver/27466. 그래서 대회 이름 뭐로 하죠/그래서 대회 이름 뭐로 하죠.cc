@@ -54,11 +54,9 @@ int main() {
     }
     
     for(int i = k-1; i >= 0; i--){
-        if(str[i] != 'A' && str[i] != 'E' && str[i] != 'I' && str[i] != 'O' && str[i] != 'U'){
             tmp += str[i];
             if(tmp.length() == m)
                 break;
-        }
     }
     reverse(tmp.begin(), tmp.end());
     if(tmp.length() < m){
