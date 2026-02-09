@@ -1,10 +1,10 @@
 # [level 3] 숫자 게임 - 12987 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12987) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/12987?language=java) 
 
 ### 성능 요약
 
-메모리: 14.5 MB, 시간: 43.87 ms
+메모리: 82.3 MB, 시간: 291.10 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2026년 02월 09일 16:13:33
+2026년 02월 09일 16:31:52
 
 ### 문제 설명
 
