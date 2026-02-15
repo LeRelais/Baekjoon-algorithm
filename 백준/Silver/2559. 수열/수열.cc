@@ -4,28 +4,28 @@
 
 using namespace std;
 
-int n, k, max_sum, cur_sum;
-vector<int> temperatures;
+int n, k;
+
 int main() {
+    cin.tie(NULL);
+    ios::sync_with_stdio(false);
+    
     cin >> n >> k;
     
-    int tmp;
+    vector<int> arr(n, 0);
+    vector<int> sum(n+1, 0);
+    
     for(int i = 0; i < n; i++){
-        cin >> tmp;
-        temperatures.push_back(tmp);
+        cin >> arr[i];
+        sum[i+1] = arr[i];
+    }
+    for(int i = 1; i <= n; i++){
+        sum[i] += sum[i-1];
     }
     
-    for(int i = 0; i < k; i++){
-        cur_sum += temperatures[i];
+    int res = 100000*-100;
+    for(int i = k; i <= n; i++){
+        res = max(res, sum[i] - sum[i-k]);
     }
-    
-    max_sum = cur_sum;
-    
-    for(int i = k; i < n; i++){
-        cur_sum = cur_sum - temperatures[i-k] + temperatures[i];
-        max_sum = max(max_sum, cur_sum);
-    }
-    
-    cout << max_sum;
-    return 0;
+    cout << res;
 }
